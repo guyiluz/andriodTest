@@ -5,11 +5,14 @@
  */
 
 import React, { Component } from 'react';
+
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
+  Alert
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -19,20 +22,57 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+const postOption = {    method: 'post',
+headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+}, 
+}
+
 type Props = {};
 export default class App extends Component<Props> {
+  constructor() {
+    super();
+  
+}
+
+
+handleShoeDevice=()=>{
+
+  const dataToserver ={userToken: "c91aded2-b1eb-4a43-ad76-8ff654525c97", rowCount: 50}
+  fetch(URL+'/core.svc/GetDevices', {
+    ...postOption,
+            body:JSON.stringify({dataToserver})
+    
+        })
+        .then(res => res.json())
+        .then((data)=>{
+
+          Alert.alert(JSON.stringify(data));
+        })
+
+  
+
+
+}
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+asdfasdf
+
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit App.js
+         sdfsdf
         </Text>
         <Text style={styles.instructions}>
-          {instructions}
+  `
         </Text>
+
+        <Button
+  onPress={this.handleShoeDevice}
+  title="Press Me"
+/>
       </View>
     );
   }
